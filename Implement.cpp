@@ -1,32 +1,40 @@
 #include "Employee.h"
-
 void Employee::get_data() {
     cout << "Enter employee name: ";
-    getline(cin, employeeName);
+    cin.ignore(); // to clear leftover newline
+    getline(cin, Name);
 
     cout << "Enter monthly salary: ";
-    cin >> monthlySalary;
+    cin >> Salary;
 
     cout << "Enter tax percentage: ";
     cin >> taxPercentage;
-
-    cin.ignore(); 
 }
 
 double Employee::salary_after_tax() {
-    double taxAmount = (monthlySalary * taxPercentage) / 100;
-    return monthlySalary - taxAmount;
+    double taxAmount = (Salary * taxPercentage) / 100;
+    double remainingSalary = Salary - taxAmount;
+    return remainingSalary;
 }
 
-void Employee::update_tax_percentage(double newTax) {
-    taxPercentage = newTax;
+void Employee::update_tax_percentage() {
+    cout << "\nEnter new tax percentage: ";
+    cin >> taxPercentage;
+
+    double updatedSalary = salary_after_tax();
+    cout << "Updated salary after tax: Rs. "
+         << updatedSalary << endl;
 }
 
 void Employee::display() {
-    cout << "\nEmployee Name: " << employeeName << endl;
-    cout << "Monthly Salary: Rs. " << monthlySalary << endl;
-    cout << "Tax Percentage: " << taxPercentage << "%" << endl;
+    cout << "\nEmployee Name: " << Name << endl;
+    cout << "Original Salary: Rs. " << Salary << endl;
+    cout << "Tax Percentage: " << taxPercentage << "%\n";
     cout << "Salary After Tax: Rs. "
          << salary_after_tax() << endl;
 }
+
+         << salary_after_tax() << endl;
+}
+
 
